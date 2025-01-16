@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use App\Models\Phrase;
 use App\Models\Letter;
 use App\Models\Number;
@@ -27,6 +28,9 @@ class SignLanguageController extends Controller
         // Check if input matches a phrase (words or multi-word phrase)
         $phrases = Phrase::whereRaw('LOWER(phrase) = ?', [strtolower($inputText)])->get();
 
+        // Check if input matches a phrase (words or multi-word phrase)
+        $foods = Food::whereRaw('LOWER(food) = ?', [strtolower($inputText)])->get();
+
         // Check if input matches a time expression (words or multi-word time expressions)
         $timeExpressions = TimeExpression::whereRaw('LOWER(time_expression) = ?', [strtolower($inputText)])->get();
 
@@ -34,6 +38,7 @@ class SignLanguageController extends Controller
         $signs = $signs->merge($letters)
                        ->merge($numbers)
                        ->merge($phrases)
+                       ->merge($foods)
                        ->merge($timeExpressions);
     }
 

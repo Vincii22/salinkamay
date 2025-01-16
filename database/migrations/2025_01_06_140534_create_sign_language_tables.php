@@ -42,6 +42,13 @@ return new class extends Migration
             $table->string('video_path');
             $table->timestamps();
         });
+
+        Schema::create('food', function (Blueprint $table) {
+            $table->id();
+            $table->string('food');
+            $table->string('video_path');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -49,6 +56,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sign_language_tables');
+        Schema::dropIfExists('foods');
+        Schema::dropIfExists('time_expressions');
+        Schema::dropIfExists('phrases');
+        Schema::dropIfExists('numbers');
+        Schema::dropIfExists('letters');
     }
 };
